@@ -45,9 +45,8 @@ public class UserSeviceImpl implements UserService {
 		UserEntity checkUser = userRepository.findByEmail(user.getEmail());
 		
 		if(checkUser != null) throw new RuntimeException("User Alrady Exists !");
-		
-		
-		for(int i=0; i < user.getAddresses().size(); i++) {
+
+	/*	for(int i=0; i < user.getAddresses().size(); i++) {
 			
 			AddressDto address = user.getAddresses().get(i);
 			address.setUser(user);
@@ -57,7 +56,7 @@ public class UserSeviceImpl implements UserService {
 		
 		user.getContact().setContactId(util.generateStringId(30));
 		user.getContact().setUser(user);
-		
+		*/
         ModelMapper modelMapper = new ModelMapper();
 		
 		UserEntity userEntity = modelMapper.map(user, UserEntity.class);
@@ -66,7 +65,7 @@ public class UserSeviceImpl implements UserService {
 		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		
 		userEntity.setUserId(util.generateStringId(32));
-		
+		userEntity.setAdmin(1);
 		UserEntity newUser = userRepository.save(userEntity);
 		
 		UserDto userDto =  modelMapper.map(newUser, UserDto.class);
@@ -99,7 +98,7 @@ public class UserSeviceImpl implements UserService {
 		
 		return userDto;
 	}
-
+	
 
 	@Override
 	public UserDto getUserByUserId(String userId) {
@@ -123,8 +122,7 @@ public class UserSeviceImpl implements UserService {
 		
 		if(userEntity == null) throw new UsernameNotFoundException(userId); 
 		
-		userEntity.setFirstName(userDto.getFirstName());
-		userEntity.setLastName(userDto.getLastName());
+
 		
 		UserEntity userUpdated = userRepository.save(userEntity);
 		
@@ -133,6 +131,11 @@ public class UserSeviceImpl implements UserService {
 		BeanUtils.copyProperties(userUpdated, user);
 		
 		return user;
+	}
+
+	@Override
+	public void save(UserEntity user) {
+
 	}
 
 

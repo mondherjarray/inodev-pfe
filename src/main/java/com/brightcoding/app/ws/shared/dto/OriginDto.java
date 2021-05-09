@@ -2,11 +2,11 @@ package com.brightcoding.app.ws.shared.dto;
 
 
 
-public class SourceDto {
+public class OriginDto {
     private Integer id;
     private String sourceId;
     private String position;
-    private String describe;
+    private String describ;
     private CondidatDto condidat;
 
     public Integer getId() {
@@ -33,12 +33,12 @@ public class SourceDto {
         this.position = position;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescrib() {
+        return describ;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescrib(String describ) {
+        this.describ = describ;
     }
 
     public CondidatDto getCondidat() {

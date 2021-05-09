@@ -7,14 +7,14 @@ import java.util.Date;
 
 @Entity
 @Data
-public class SourceEntity implements Serializable{
+public class OriginEntity implements Serializable{
 
     @Id
     @GeneratedValue
     private Integer id;
     private String sourceId;
     private String position;
-    private String describe;
+    private String describ;
     @ManyToOne
     private CondidatEntity condidat;
 
@@ -42,12 +42,12 @@ public class SourceEntity implements Serializable{
         this.position = position;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescrib() {
+        return describ;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescrib(String describ) {
+        this.describ = describ;
     }
 
     public CondidatEntity getCondidat() {

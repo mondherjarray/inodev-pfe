@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.brightcoding.app.ws.entities.UserEntity;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends PagingAndSortingRepository<UserEntity, Long> {
 	
@@ -31,5 +33,7 @@ public interface UserRepository extends PagingAndSortingRepository<UserEntity, L
 	
 	@Query(value="SELECT * FROM users u WHERE (u.first_name LIKE %:search% OR u.last_name LIKE %:search%) AND u.email_verification_status = :status", nativeQuery=true)
 	Page<UserEntity> findAllUserByCriteria(Pageable pageableRequest, @Param("search") String search, @Param("status") int status);
-	
+
+	Optional<UserEntity> findUserByResetToken(String token);
+	public UserEntity save(UserEntity user);
 }

@@ -72,7 +72,7 @@ public class AddressController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String> updatreAddresse(@PathVariable(name="id") String addressId) {
+	public ResponseEntity<String> updateAddresse(@PathVariable(name="id") String addressId) {
 		return new ResponseEntity<>("update addresses", HttpStatus.ACCEPTED);
 	}
 	

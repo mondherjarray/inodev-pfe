@@ -71,15 +71,14 @@ public class UserController {
 	
 	
 	@PostMapping(
-			    consumes={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}, 
+			    consumes={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
 			    produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
 			    )
 	public ResponseEntity<UserResponse> createUser(@RequestBody @Valid UserRequest userRequest) throws Exception {
 		
-		if(userRequest.getFirstName().isEmpty()) throw new UserException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
-		
-		//UserDto userDto = new UserDto();
-		//BeanUtils.copyProperties(userRequest, userDto);
+		/*if(userRequest.getFirstName().isEmpty()) throw new UserException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
+		*/
+
 		ModelMapper modelMapper = new ModelMapper();
 		UserDto userDto = modelMapper.map(userRequest, UserDto.class);
 		

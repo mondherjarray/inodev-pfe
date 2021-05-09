@@ -1,2 +1,4 @@
-package com.brightcoding.app.ws.entities;public class CondidatOffreIdEntity {
+package com.brightcoding.app.ws.entities;
+
+public class CondidatOffreIdEntity {
 }

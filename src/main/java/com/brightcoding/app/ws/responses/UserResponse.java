@@ -5,13 +5,18 @@ import java.util.List;
 public class UserResponse {
 
 	private String userId;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private Boolean admin;
-	private List<AddressResponse> addresses;
-	private ContactResponse contact;
 
+	private String email;
+	private int admin;
+	private String enabled;
+
+	public String getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -19,22 +24,6 @@ public class UserResponse {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -45,27 +34,11 @@ public class UserResponse {
 		this.email = email;
 	}
 
-	public List<AddressResponse> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(List<AddressResponse> addresses) {
-		this.addresses = addresses;
-	}
-
-	public ContactResponse getContact() {
-		return contact;
-	}
-
-	public void setContact(ContactResponse contact) {
-		this.contact = contact;
-	}
-
-	public Boolean getAdmin() {
+	public int getAdmin() {
 		return admin;
 	}
 
-	public void setAdmin(Boolean admin) {
+	public void setAdmin(int admin) {
 		this.admin = admin;
 	}
 

@@ -25,7 +25,7 @@ public class AddressEntity implements Serializable {
 	private String city;
 	
 	@Column(length=20, nullable=false)
-	private String country;
+	private String country="aceje";
 	
 	@Column(length=50, nullable=false)
 	private String street;

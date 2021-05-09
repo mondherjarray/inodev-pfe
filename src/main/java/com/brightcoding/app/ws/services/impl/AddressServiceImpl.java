@@ -34,7 +34,7 @@ public class AddressServiceImpl implements AddressService {
 		
 		UserEntity currentUser = userRepository.findByEmail(email);
 		
-		List<AddressEntity> addresses = currentUser.getAdmin() == true ? (List<AddressEntity>) addressRepository.findAll() : addressRepository.findByUser(currentUser);
+		List<AddressEntity> addresses = currentUser.getAdmin() == 1? (List<AddressEntity>) addressRepository.findAll() : addressRepository.findByUser(currentUser);
 		
 		Type listType = new TypeToken<List<AddressDto>>() {}.getType();
 		List<AddressDto> addressesDto = new ModelMapper().map(addresses, listType);

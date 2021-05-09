@@ -1,10 +1,10 @@
 package com.brightcoding.app.ws.requests;
 
-public class SourceRequest {
+public class OriginRequest {
     private Integer id;
     private String sourceId;
     private String position;
-    private String describe;
+    private String describ;
 
     public Integer getId() {
         return id;
@@ -30,11 +30,11 @@ public class SourceRequest {
         this.position = position;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescrib() {
+        return describ;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescrib(String describ) {
+        this.describ = describ;
     }
 }

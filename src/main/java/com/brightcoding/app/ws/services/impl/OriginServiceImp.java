@@ -4,10 +4,10 @@ import com.brightcoding.app.ws.entities.CondidatEntity;
 import com.brightcoding.app.ws.entities.OriginEntity;
 import com.brightcoding.app.ws.repositories.CondidatRepository;
 import com.brightcoding.app.ws.repositories.OriginRepository;
-import com.brightcoding.app.ws.services.SourceService;
+import com.brightcoding.app.ws.services.OriginService;
 import com.brightcoding.app.ws.shared.Utils;
 import com.brightcoding.app.ws.shared.dto.CondidatDto;
-import com.brightcoding.app.ws.shared.dto.SourceDto;
+import com.brightcoding.app.ws.shared.dto.OriginDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.BeanUtils;
@@ -19,7 +19,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 @Service
-public class SourceServiceImp implements SourceService {
+public class OriginServiceImp implements OriginService {
     @Autowired
     OriginRepository originRepository;
 
@@ -30,21 +30,21 @@ public class SourceServiceImp implements SourceService {
     Utils util;
 
     @Override
-    public List<SourceDto> getAllSource(String email) {
+    public List<OriginDto> getAllSource(String email) {
 
         CondidatEntity currentCondidat = condidatRepository.findByEmail(email);
 
-        List<OriginEntity> sources = currentCondidat.getAdmin() == true? (List<OriginEntity>) originRepository.findAll() : originRepository.findByCondidat(currentCondidat);
+        List<OriginEntity> sources = currentCondidat.getAdmin() == 1? (List<OriginEntity>) originRepository.findAll() : originRepository.findByCondidat(currentCondidat);
 
         Type listType = new TypeToken<List<OriginEntity>>() {}.getType();
-        List<SourceDto> sourceDto = new ModelMapper().map(sources, listType);
+        List<OriginDto> originDto = new ModelMapper().map(sources, listType);
 
-        return sourceDto;
+        return originDto;
     }
 
 
     @Override
-    public SourceDto createSource(SourceDto education, String email) {
+    public OriginDto createSource(OriginDto education, String email) {
 
         CondidatEntity currentCondidat = condidatRepository.findByEmail(email);
 
@@ -57,20 +57,20 @@ public class SourceServiceImp implements SourceService {
 
         OriginEntity newEducation = originRepository.save(educationEntity);
 
-        SourceDto educationDto = modelMapper.map(newEducation, SourceDto.class);
+        OriginDto educationDto = modelMapper.map(newEducation, OriginDto.class);
 
         return educationDto;
     }
 
 
     @Override
-    public SourceDto getSource(String educationId) {
+    public OriginDto getSource(String educationId) {
 
         OriginEntity educationEntity = originRepository.findBySourceId(educationId);
 
         ModelMapper modelMapper = new ModelMapper();
 
-        SourceDto educationDto = modelMapper.map(educationEntity, SourceDto.class);
+        OriginDto educationDto = modelMapper.map(educationEntity, OriginDto.class);
 
         return educationDto;
     }
@@ -86,7 +86,7 @@ public class SourceServiceImp implements SourceService {
 
     }
     @Override
-    public SourceDto updateSource(String id, SourceDto educationDto) {
+    public OriginDto updateSource(String id, OriginDto educationDto) {
 
         OriginEntity educationEntity = originRepository.findBySourceId(id);
 
@@ -97,7 +97,7 @@ public class SourceServiceImp implements SourceService {
 
         OriginEntity educ = originRepository.save(educationEntity);
 
-        SourceDto educt = new SourceDto();
+        OriginDto educt = new OriginDto();
 
         BeanUtils.copyProperties(educ, educt);
 
