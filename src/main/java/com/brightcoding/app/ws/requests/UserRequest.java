@@ -30,13 +30,13 @@ public class UserRequest {
 	private String password;
 	
 	private int admin;
-	private String enabled;
+	private Integer enabled;
 
-	public String getEnabled() {
+	public Integer getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(String enabled) {
+	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
 	}
 

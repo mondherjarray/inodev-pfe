@@ -5,16 +5,24 @@ import java.util.List;
 public class UserResponse {
 
 	private String userId;
-
+	private Long id;
 	private String email;
 	private int admin;
-	private String enabled;
+	private Integer enabled;
 
-	public String getEnabled() {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(String enabled) {
+	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
 	}
 

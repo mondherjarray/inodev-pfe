@@ -1,5 +1,7 @@
 package com.brightcoding.app.ws.controllers;
 
+import com.brightcoding.app.ws.entities.SkillsEntity;
+import com.brightcoding.app.ws.repositories.SkillsRepository;
 import com.brightcoding.app.ws.requests.SkillsRequest;
 import com.brightcoding.app.ws.responses.SkillsResponse;
 import com.brightcoding.app.ws.services.SkillsService;
@@ -22,6 +24,8 @@ public class SkillsController {
 
     @Autowired
     SkillsService educationService;
+    @Autowired
+    SkillsRepository re ;
 
     @GetMapping
     public ResponseEntity<List<SkillsResponse>> getSkills(Principal principal) {
@@ -72,6 +76,14 @@ public class SkillsController {
         SkillsResponse SkillsResponse = modelMapper.map(SkillsDto, SkillsResponse.class);
 
         return new ResponseEntity<SkillsResponse>(SkillsResponse, HttpStatus.OK);
+    }
+    @GetMapping("/offre")
+    public   Iterable<SkillsEntity> getOoffre() {
+
+        Iterable<SkillsEntity> skillsDto = re.findAll();
+        ModelMapper modelMapper = new ModelMapper();
+        SkillsEntity skillsResponse = modelMapper.map(skillsDto, SkillsEntity.class);
+        return skillsDto;
     }
 
 

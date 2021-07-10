@@ -53,16 +53,16 @@ public class UserEntity implements Serializable {
 	@Column(name = "reset_token")
 	private String resetToken;
 
-	public String isEnabled() {
+	public Integer isEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(String enabled) {
+	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
 	}
 
 	@Column(name = "enabled")
-	private String enabled;
+	private Integer enabled;
 
 	public String getResetToken() {
 		return resetToken;

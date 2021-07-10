@@ -15,7 +15,7 @@ public class UserDto implements Serializable {
 	private String email;
 	private String password;
 	private int admin;
-	private String enabled;
+	private Integer enabled;
 	private String encryptedPassword;
 	private String emailVerificationToken;
 	private Boolean emailVerificationStatus = false;
@@ -28,11 +28,11 @@ public class UserDto implements Serializable {
 		this.id = id;
 	}
 
-	public String getEnabled() {
+	public Integer getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(String enabled) {
+	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
 	}
 

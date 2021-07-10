@@ -140,9 +140,11 @@ public class CondidatController {
         if (file.getName() != null) {
         String filename = file.getOriginalFilename();
         String newFileName = FilenameUtils.getBaseName(filename)+"."+FilenameUtils.getExtension(filename);
-        File serverFile = new File (context.getRealPath("src/web/Images/"+File.separator+newFileName));
+        File serverFile = new File (context.getRealPath("src/web/Images/"+File.separator+newFileName+off.getUserId()));
         String distfile = "src/web/Images/"+ file.getOriginalFilename();
-        try
+            updateCondidat.setPhoto(file.getOriginalFilename()  );
+
+            try
         {
             System.out.println("Image");
             FileUtils.writeByteArrayToFile(serverFile,file.getBytes());
@@ -155,7 +157,6 @@ public class CondidatController {
         }
         }
         CondidatResponse condidatResponse = new CondidatResponse();
-        updateCondidat.setPhoto(file.getOriginalFilename()  );
         BeanUtils.copyProperties(updateCondidat, condidatResponse);
 
         return new ResponseEntity<CondidatResponse>(condidatResponse, HttpStatus.ACCEPTED);

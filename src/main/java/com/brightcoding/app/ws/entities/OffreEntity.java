@@ -34,6 +34,7 @@ public class OffreEntity {
     private String duree;
     private String niveau;
     private Long prix;
+    private Long supervisor;
     private String processus;
     @OneToMany(cascade = CascadeType.ALL,mappedBy="offre" )
     List<CondidatOffreEntity> condidatoffre;
@@ -41,9 +42,27 @@ public class OffreEntity {
     private List<SkillsEntity> skills;
     @OneToMany(cascade = CascadeType.ALL,mappedBy="offre" )
     private List<SpecialiteEntity> specialite;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="offre" )
+    private List<Event> event;
+
+    public Long getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(Long supervisor) {
+        this.supervisor = supervisor;
+    }
 
     public Integer getId() {
         return id;
+    }
+
+    public List<Event> getEvent() {
+        return event;
+    }
+
+    public void setEvent(List<Event> event) {
+        this.event = event;
     }
 
     public void setId(Integer id) {
@@ -184,5 +203,7 @@ public class OffreEntity {
                 + ", organisation=" + organisation + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", description=" + description + ", video=" + video
                 + ", prix=" + prix + ", processus=" + processus +" , duree=" + duree + ", niveau=" + niveau + "]";
     }
-
+    public OffreEntity () {
+        super();
+    }
 }

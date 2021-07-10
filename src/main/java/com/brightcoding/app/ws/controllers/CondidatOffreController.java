@@ -5,6 +5,7 @@ import com.brightcoding.app.ws.repositories.CondidatOffreRepository;
 import com.brightcoding.app.ws.repositories.CondidatRepository;
 import com.brightcoding.app.ws.repositories.OffreRepository;
 import com.brightcoding.app.ws.repositories.SpecialiteRepository;
+import com.brightcoding.app.ws.services.SendMailService;
 import com.brightcoding.app.ws.shared.Utils;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -33,6 +34,8 @@ public class CondidatOffreController {
     @Autowired
     CondidatRepository condidatRepository;
     @Autowired
+    SendMailService mail;
+    @Autowired
     OffreRepository of;
     @Autowired
     ServletContext context;
@@ -56,6 +59,23 @@ public class CondidatOffreController {
         return ("okokok");
 
     }
+
+    @PostMapping("/accept")
+    public String accept (@RequestBody Long offreId)
+    {
+
+        CondidatOffreEntity co = repository.findByaId(offreId);
+        CondidatEntity c = condidatRepository.findById(co.getCondidat().getId());
+        co.setStatut(0);
+System.out.println("send .....");
+        CondidatOffreEntity of = repository.save(co);
+mail.sendSimpleMessage(c.getEmail(), "te9belt fi offre", "mabrouk");
+
+        System.out.println("saye ........");
+        return ("okokok");
+
+    }
+
     @GetMapping("/exist/{id}")
     public Integer exist (@PathVariable(name="id") Integer offreId, Principal principale) throws JsonParseException, JsonMappingException, Exception
     {
@@ -89,6 +109,29 @@ public class CondidatOffreController {
         return app;
 
     }
+
+    @GetMapping("/calendar/{id}")
+    public List calendar (@PathVariable Integer id) throws JsonParseException, JsonMappingException, Exception
+    {
+        List app = repository.findBycalendar(id);
+        return app;
+
+    }
+    @GetMapping("/calendar1/{id}")
+    public List calendar1 (@PathVariable Integer id) throws JsonParseException, JsonMappingException, Exception
+    {
+        List app = repository.findBycalendar1(id);
+        return app;
+
+    }
+    @GetMapping("/calendar2/{id}")
+    public List calendar2 (@PathVariable Integer id) throws JsonParseException, JsonMappingException, Exception
+    {
+        List app = repository.findBycalendar2(id);
+        return app;
+
+    }
+
     @DeleteMapping("/exist/{id}")
     public String delete (@PathVariable(name="id") Integer offreId, Principal principale) throws JsonParseException, JsonMappingException, Exception
     {

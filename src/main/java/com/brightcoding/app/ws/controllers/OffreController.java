@@ -1,11 +1,17 @@
 package com.brightcoding.app.ws.controllers;
 
+import com.brightcoding.app.ws.entities.CondidatEntity;
 import com.brightcoding.app.ws.entities.OffreEntity;
+import com.brightcoding.app.ws.entities.SkillsEntity;
 import com.brightcoding.app.ws.entities.SpecialiteEntity;
 import com.brightcoding.app.ws.repositories.CondidatRepository;
 import com.brightcoding.app.ws.repositories.OffreRepository;
+import com.brightcoding.app.ws.repositories.SpecialiteRepository;
+import com.brightcoding.app.ws.services.SendMailService;
 import com.brightcoding.app.ws.shared.Utils;
 import com.brightcoding.app.ws.shared.dto.CondidatDto;
+import com.brightcoding.app.ws.shared.dto.SkillsDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -36,6 +42,10 @@ public class OffreController {
         OffreRepository repository;
         @Autowired
         CondidatRepository condidatRepository;
+    @Autowired
+    SpecialiteRepository Srepository;
+    @Autowired
+    SendMailService mail;
         @Autowired
         ServletContext context;
     @Autowired
@@ -87,8 +97,9 @@ public class OffreController {
         }
         return new ResponseEntity<List<String>>(listof, HttpStatus.OK);
     }
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     @PostMapping
-    public OffreEntity createOffre (@RequestParam("file") MultipartFile file,
+    public Long createOffre (@RequestParam("file") MultipartFile file,
                                                    @RequestParam("offre") String offre) throws JsonParseException, JsonMappingException, Exception
     {
         System.out.println("Ok .............");
@@ -118,8 +129,28 @@ public class OffreController {
         BeanUtils.copyProperties(offre, off);
         off.setOffreId(util.generateStringId(30));
         off.setImage(newFileName);
+
+        for(int i=0; i < off.getSkills().size(); i++) {
+
+            SkillsEntity address = off.getSkills().get(i);
+           // address.setOffre(off);
+            address.setSkillsId(util.generateStringId(30));
+            off.getSkills().set(i, address);
+        }
+        for(int i=0; i < off.getSpecialite().size(); i++) {
+
+            SpecialiteEntity spec = off.getSpecialite().get(i);
+            spec.setOffre(off);
+            spec.setSpecialiteId(util.generateStringId(30));
+            off.getSpecialite().set(i, spec);
+        }
+     /*   List<CondidatEntity> c = condidatRepository.findAllaCondidats();
+        for (int i = 0; i < c.size(); i++) {
+            mail.sendSimpleMessage(c.get(i).getEmail(), "Nous avons publie un offre consulte notre platform sur http://localhost:4200/offre/cat/" + off.getType(), "Nouveau offre");
+        }*/
         OffreEntity of = repository.save(off);
-            return (of);
+            return (of.getSupervisor());
+
 
     }
 

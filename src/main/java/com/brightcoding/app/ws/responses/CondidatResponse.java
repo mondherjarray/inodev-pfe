@@ -15,7 +15,10 @@ public class CondidatResponse extends UserResponse{
     private String gender;
     private Date date_birthday;
     private String nationality;
-
+    EducationResponse education;
+    SkillsResponse skills;
+    ExperienceResponse experience;
+    DocumentResponse document;
 
     public String getFirstName() {
         return firstName;
@@ -73,4 +76,35 @@ public class CondidatResponse extends UserResponse{
         this.nationality = nationality;
     }
 
+    public EducationResponse getEducation() {
+        return education;
+    }
+
+    public void setEducation(EducationResponse education) {
+        this.education = education;
+    }
+
+    public SkillsResponse getSkills() {
+        return skills;
+    }
+
+    public void setSkills(SkillsResponse skills) {
+        this.skills = skills;
+    }
+
+    public ExperienceResponse getExperience() {
+        return experience;
+    }
+
+    public void setExperience(ExperienceResponse experience) {
+        this.experience = experience;
+    }
+
+    public DocumentResponse getDocument() {
+        return document;
+    }
+
+    public void setDocument(DocumentResponse document) {
+        this.document = document;
+    }
 }

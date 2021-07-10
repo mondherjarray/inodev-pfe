@@ -1,6 +1,7 @@
 package com.brightcoding.app.ws.entities;
 
 import lombok.Data;
+import org.hibernate.engine.profile.Fetch;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,7 +20,7 @@ public class SkillsEntity implements Serializable {
     private Boolean certifier;
     @ManyToOne
     private CondidatEntity condidat;
-    @ManyToOne
+    @ManyToOne (fetch= FetchType.LAZY)
     private OffreEntity offre;
 
     public Integer getId() {

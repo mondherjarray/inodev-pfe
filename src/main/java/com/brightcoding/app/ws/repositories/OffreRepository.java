@@ -22,7 +22,7 @@ public interface OffreRepository extends JpaRepository<OffreEntity, Integer> {
     @Query("SELECT t.id, t.nom, t.image, t.id, t.duree, t.dateFin, t.description, t.organisation," +
             " t.prix, t.processus, t.type, t.offreId, t.video FROM OffreEntity t where t.type = :type ")
     List findaAll(String type);
-    @Query("SELECT t.offreId, t.nom, t.id FROM OffreEntity t")
+    @Query("SELECT t.offreId, t.nom, t.id, t.supervisor, t.dateFin, t.duree, t.id FROM OffreEntity t")
     List findAllByNom();
     @Query("SELECT t.id, t.nom, t.image, t.id, t.dateDebut, t.dateFin, t.description, t.organisation," +
             " t.prix, t.processus, t.duree, t.niveau, t.type, t.offreId, t.video FROM OffreEntity t where t.id = :id and t.type = :type ")
@@ -64,4 +64,5 @@ public interface OffreRepository extends JpaRepository<OffreEntity, Integer> {
             " t.prix, t.processus, t.duree, t.niveau, t.type, t.offreId, t.video FROM OffreEntity t " +
             "where t.duree = :duree and t.type = :type and t.dateFin >= current_date")
     List findBynsnull(String duree, String type);
+
 }
